@@ -7,31 +7,15 @@
 # home/vscode/.config/mise/config.toml
 # Add custom Mise tools and version to your projects root as .mist.toml  See: https://mise.jdx.dev/configuration.html
 
-ARG BASE_IMAGE=rockylinux:9
+FROM rockylinux:9
 
-FROM $BASE_IMAGE AS builder
-
-# If you are having issues with the build, set a local env var called GITHUB_TOKEN with a read only github access token.
-# The .devcontainer/devcontainer.json file will pass this to the build.
-ARG GITHUB_TOKEN
-ENV GITHUB_API_TOKEN=${GITHUB_TOKEN}
+LABEL org.opencontainers.image.source=https://github.com/sarg3nt/go-dev-container
 
 ENV TZ='America/Los_Angeles'
 
 # What user will be created in the dev container and will we run under.
 # Reccomend not changing this.
 ENV USERNAME="vscode"
-
-# Set any proxies you may need here.
-# The default .devcontainer/devcontainer.json file will pass these to the build if they are set on your host.
-ARG PROXY_HTTP=""
-ARG PROXY_NO=''
-ENV HTTP_PROXY=${PROXY_HTTP}
-ENV HTTPS_PROXY=${PROXY_HTTP}
-ENV http_proxy=${PROXY_HTTP}
-ENV https_proxy=${PROXY_HTTP}
-ENV no_proxy=${PROXY_NO}
-ENV NO_PROXY=${PROXY_NO}
 
 # Copy script libraries for use by internal scripts
 COPY usr/bin/lib /usr/bin/lib
