@@ -3,7 +3,6 @@
 
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sarg3nt/go-dev-container/badge)](https://scorecard.dev/viewer/?uri=github.com/sarg3nt/go-dev-container)
 [![Scorecard supply-chain security](https://github.com/sarg3nt/go-dev-container/actions/workflows/scorecard.yml/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/scorecard.yml)
-[![CodeQL](https://github.com/sarg3nt/go-dev-container/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/github-code-scanning/codeql)
 [![trivy](https://github.com/sarg3nt/go-dev-container/actions/workflows/trivy.yml/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/trivy.yml)
 [![Dependabot Updates](https://github.com/sarg3nt/go-dev-container/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/dependabot/dependabot-updates)
 [![Dependency Review](https://github.com/sarg3nt/go-dev-container/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/dependency-review.yml)
