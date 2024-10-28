@@ -1,15 +1,32 @@
 <!--cspell:ignore sarg  -->
 # Go Dev Container
 
-<!-- [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sarg3nt/cert-manager-webhook-infoblox-wapi/badge)](https://scorecard.dev/viewer/?uri=github.com/sarg3nt/cert-manager-webhook-infoblox-wapi)
-[![CodeQL](https://github.com/sarg3nt/cert-manager-webhook-infoblox-wapi/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/sarg3nt/cert-manager-webhook-infoblox-wapi/actions/workflows/github-code-scanning/codeql)
-[![Release](https://github.com/sarg3nt/cert-manager-webhook-infoblox-wapi/actions/workflows/release.yml/badge.svg)](https://github.com/sarg3nt/cert-manager-webhook-infoblox-wapi/actions/workflows/release.yml) -->
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sarg3nt/go-dev-container/badge)](https://scorecard.dev/viewer/?uri=github.com/sarg3nt/go-dev-container)
+[![Scorecard supply-chain security](https://github.com/sarg3nt/go-dev-container/actions/workflows/scorecard.yml/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/scorecard.yml)
+[![CodeQL](https://github.com/sarg3nt/go-dev-container/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/github-code-scanning/codeql)
+[![trivy](https://github.com/sarg3nt/go-dev-container/actions/workflows/trivy.yml/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/trivy.yml)
+[![Dependabot Updates](https://github.com/sarg3nt/go-dev-container/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/dependabot/dependabot-updates)
+[![Dependency Review](https://github.com/sarg3nt/go-dev-container/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/dependency-review.yml)
+[![Release](https://github.com/sarg3nt/go-dev-container/actions/workflows/release.yml/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/release.yml)
 
 A Go Dev Container using `mise` to install Go and other conventinet tools.  `mise` can then be used to install various other go versions as needed.
 
+- [Tools Included](#tools-included)
+  - [Go Tooling](#go-tooling)
+  - [Utilities](#utilities)
+- [Using `mise` to Manage Go Versions](#using-mise-to-manage-go-versions)
+- [Included `.devcontainer` Config](#included-devcontainer-config)
+- [Initial Worksation Setup](#initial-worksation-setup)
+  - [WSL](#wsl)
+  - [Windows Font Install](#windows-font-install)
+    - [Windows Terminal Font Setup](#windows-terminal-font-setup)
+    - [Visual Studio Code Font Setup](#visual-studio-code-font-setup)
+- [Initial Dev Container and Project Setup](#initial-dev-container-and-project-setup)
+  - [`dev.sh`](#devsh)
+  - [Dev Container Setup](#dev-container-setup)
 - [Contributions](#contributions)
-- [License](#license)
 - [Author](#author)
+
 
 ## Tools Included
 
