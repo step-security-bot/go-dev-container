@@ -9,7 +9,7 @@ IFS=$'\n\t'
 # See: https://github.com/devcontainers/features
 main() {
   source "/usr/bin/lib/sh/log.sh"
-  log "20-install-microsoft-dev-container-features.sh" "blue"
+  log "20_install_microsoft_dev_container_features.sh" "blue"
 
   log "Exporting zshell variables" "green"
   export CONFIGUREZSHASDEFAULTSHELL=true

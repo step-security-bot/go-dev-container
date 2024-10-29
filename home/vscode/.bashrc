@@ -93,7 +93,7 @@ alias help="/usr/local/bin/help"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Active mise
-eval "$(~/.local/bin/mise activate bash)"
+eval "$(/usr/local/bin/mise activate bash)"
 mie trust --all
 mise install --yes
 

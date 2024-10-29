@@ -17,8 +17,8 @@ main() {
   local docker_exec_command="gdc"
   # Name of the project folder
   local project_name="go-dev-container"
-  # Name of the container
-  local container_name="go-dev-container"
+  # Name of the container.  This assumes you are using the same name as the project folder in the devcontainer.json file 'runargs' section.
+  local container_name="${project_name}"
   # User being created in the container
   local container_user="vscode"
 

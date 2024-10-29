@@ -8,7 +8,7 @@ IFS=$'\n\t'
 # Install system packages
 main() {
   source "/usr/bin/lib/sh/log.sh"
-  log "10-install-system-packages.sh" "blue"
+  log "10_install_system_packages.sh" "blue"
 
   log "Adding install_weak_deps=False to /etc/dnf/dnf.conf" "green"
   echo "install_weak_deps=False" >>/etc/dnf/dnf.conf
