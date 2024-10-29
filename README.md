@@ -20,10 +20,11 @@ A Go Dev Container using `mise` to install Go and other convenient tools.
   - [`dev.sh`](#devsh)
 - [Starship](#starship)
 - [Initial Worksation Setup](#initial-worksation-setup)
-  - [WSL](#wsl)
+  - [WSL on Windows](#wsl-on-windows)
   - [Windows Font Install](#windows-font-install)
     - [Windows Terminal Font Setup](#windows-terminal-font-setup)
-    - [Visual Studio Code Font Setup](#visual-studio-code-font-setup)
+  - [Linux Font Install](#linux-font-install)
+  - [Visual Studio Code Font Setup](#visual-studio-code-font-setup)
 - [Contributions](#contributions)
 - [Author](#author)
 
@@ -57,19 +58,22 @@ See the base `mise` config file at `home/vscode/.config/mise/config.toml` for al
 
 ## Included `.devcontainer` Config
 
-This project not only builds the dev container into the provided Docker container it also includes an example implemantion in the `.devcontainer` directory.  
-Do the following to use this implementation.
+This repository not only builds a Go dev container into a Docker container it also includes example usage in the `.devcontainer` directory.  
+
+Do the following to use this example.
 
 1. Clone down the repository.
-1. Copy the `.devcontainer` directory to your project.  Note:  you should not already have a `.devcontainer` directory or things could get weird.
-1. Copy the following files to the root of your project.  All of these are optional but encouraged.
+2. Ensure your target project does not already have a `.devcontainer` directory.  If it does, you will either need to rename it for testing or delete it.
+3. Copy the `.devcontainer` directory to your project.
+4. Copy the following files to the root of your project.  
+   These are optional but encouraged.
     - `.mise.toml`:  The config file for manageing specific versions of tooling you need for your Go project.
     - `cspell.json`:  The cspell config for spell checking in your project, edit to add any specific words that your project needs.
     - `dev.sh`:  Helps launch VSCode and exec into the dev container.  This file needs some modification to use in your repository.  See [dev.sh](#devsh) for instructions.
 
 ### Dev Container Setup
 
-Once you've followed the above instructions and have copied the needed files to your project, perform the following actions to configure them.
+Once you've followed the above instructions to copy the needed files to your project, perform the following to configure them.
 
 Edit the `devcontainer.json` file to make the following changes.
 
@@ -77,6 +81,8 @@ Edit the `devcontainer.json` file to make the following changes.
 - Change `--name` in `runargs` from `go-dev-container` to the name  of your project.
 - Change `source=go-dev-container-bashhistory` to `source=<YOUR-PROJECT>-bashhistory`
 - Change `source=go-dev-container-plugins` to `source=<YOUR-PROJECT>-plugins`
+
+> **NOTE:** You may be tempted to find and replace `go-dev-container` with the name of your project, however the `image` for the container is called `go-dev-container` so that would break things.  If you want to do a controlled replacement you can, just be careful not to replace that one line.
 
 ### `dev.sh`
 
@@ -88,7 +94,9 @@ You can run `dev.sh` in multiple terminals once VSCode is running and the contai
 - Change `project_name` to match the name of the repository.  Example: If your root project repository is called `my-go-project` then set `project_name` to `my-go-project`
 
 To use the `./dev.sh` script, simply run it, then when VS Code opens, there should be a prompt at the bottom right of the editor saying "Folder contains a Dev Container . . .".  Click the "Reopen in Container" button and VS Code will open the dev container and attach to it.
+
 <img src="images/reopen-in-container.png" alt="Reopen in Container" width="400"/>
+
 > **NOTE:** If you have not opened the dev container before or if it has been updated it will download the container from Github, which can take a while.
 
 ## Starship 
@@ -106,7 +114,7 @@ See [Initial Worksation Setup](#initial-worksation-setup) for instructions on do
 Instructions to set up your worksation.
 For more information on Dev Containers check out the [official docs](https://code.visualstudio.com/docs/devcontainers/containers).
 
-### WSL
+### WSL on Windows
 
 1. If you will be building Docker containers in Windows, then install Docker Desktop for Windows following [Docker's instructions](https://docs.docker.com/desktop/install/windows-install/).  If you do not need Docker for Windows support then you can [directly install Docker inside of Ubuntu](https://docs.docker.com/engine/install/ubuntu/) **AFTER** you install WSL and Ubuntu in the following steps. 
 1. Install VS Code from the [Visual Studio Code website](https://code.visualstudio.com/download) or from the Microsoft Store.
@@ -131,13 +139,19 @@ Download your chosen font and [install it in Windows](https://support.microsoft.
 1. Under `Additional Settings` select `Appearance`
 1. Under `Font Face` select the name of the font you downloaded, for example if you chose the "Firacode Nerd Font" then you'd choose `Firacode NF`  You may need to check `Show all items` or restart Windows Terminal to see the new fonts.
 
-#### Visual Studio Code Font Setup
+### Linux Font Install
+
+See [How to Install New (or Nerd) Fonts on Linux (Ultimate Guide)](https://linuxtldr.com/install-fonts-on-linux/) for instructions.
+
+### Visual Studio Code Font Setup
+
+The fonts must be installed in your operating system to be used in VSCode.  If you are running VSCode on Windows and using it in Linux inside of WSL you would still install the fonts in Windows.
 
 1. Select `File` --> `Preferences` --> `Settings`
 1. Expand `Text Editor` --> select `Font`
 1. In the `Font Family` text box paste the following:  
 
-> **NOTE:** This assumes you chose "FiraCode NF", if not, replace the first font name with the name of the font you installed in Windows.
+    > **NOTE:** This assumes you chose "FiraCode NF", if not, replace the first font name with the name of the font you installed in Windows.
 
    ```
    'FiraCode NF', 'CaskaydiaCove NF', Consolas, 'Courier New', monospace
