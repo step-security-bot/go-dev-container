@@ -169,7 +169,7 @@ The fonts must be installed in your operating system to be used in VSCode.  If y
 
 ## Contributions
 
-If you would like to contribute to this projects, please, open a PR via GitHub. Thanks.
+Contributions are welcome via the standard Github Fork --> PR process.
 
 ## Author
 
