@@ -8,12 +8,13 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
+permissions: read-all
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -21,7 +22,5 @@ jobs:
         # and https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md#branches
       - name: Release
         uses: huggingface/semver-release-action@latest
-        permissions:
-          contents: write
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
