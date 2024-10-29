@@ -4,9 +4,9 @@
 # supports arbitrary env vars so mise can be used like direnv/dotenv
 #EXAMPLE = 'bar'
 
-[tools]
 # specify single or multiple versions of specific tools you want installed for this project.
-golang = '1.23.2'
-golangci-lint = '1.61.0'
-goreleaser = "2.3.2"
-kubectl = "1.30"
+# Below are examples.
+# [tools]
+# golang = '1.23.1'
+# golangci-lint = '1.61.0'
+# goreleaser = "2.3.2"
