@@ -16,9 +16,8 @@ A Go Dev Container using `mise` to install Go and other convenient tools.
   - [Utilities](#utilities)
 - [Using `mise` to Manage Go Versions](#using-mise-to-manage-go-versions)
 - [Included `.devcontainer` Config](#included-devcontainer-config)
-- [Initial Dev Container and Project Setup](#initial-dev-container-and-project-setup)
-  - [`dev.sh`](#devsh)
   - [Dev Container Setup](#dev-container-setup)
+  - [`dev.sh`](#devsh)
 - [Starship](#starship)
 - [Initial Worksation Setup](#initial-worksation-setup)
   - [WSL](#wsl)
@@ -68,9 +67,16 @@ Do the following to use this implementation.
     - `cspell.json`: The cspell config for spell checking in your project, edit to add any specific words that your project needs.
     - `dev.sh`: This file helps launch and exec into the dev container.  This file needs some modification to use in your repository.  See [Initial Dev Container and Project Setup](#initial-dev-container-and-project-setup) for instructions.
 
-## Initial Dev Container and Project Setup
+### Dev Container Setup
 
-The following contains initial project setup.
+Once you've followed the above instructions and have copied the needed files to your project, perform the following actions to configure them.
+
+Edit the `devcontainer.json` file to make the following changes.
+
+- Change `name` from `go-dev-container` to the name of your project.
+- Change `--name` in `runargs` from `go-dev-container` to the name  of your project.
+- Change `source=go-dev-container-bashhistory` to `source=<YOUR-PROJECT>-bashhistory`
+- Change `source=go-dev-container-plugins` to `source=<YOUR-PROJECT>-plugins`
 
 ### `dev.sh`
 
@@ -80,17 +86,8 @@ This script is used to more easily start Visual Studio code and hop into the Dev
 - Change `project_name` to match the name of the repository.  Example: If your root project repository is called `my-go-project` then set `project_name` to `my-go-project`
 
 To use the `./dev.sh` script, simply run it, then when VS Code opens, there should be a prompt at the bottom right of the editor saying "Folder contains a Dev Container . . .".  Click the "Reopen in Container" button and VS Code will open the dev container and attach to it.
-![Reopen in Container](images/reopen-in-container.png)
+<img src="images/reopen-in-container.png" alt="Reopen in Container" width="400"/>
 > **NOTE:** If you have not opened the dev container before or if it has been updated it will download the container from Github, which can take a while.
-
-### Dev Container Setup
-
-Edit the `devcontainer.json` file to make the following changes.
-
-- Change `name` from `go-dev-container` to the name of your project.
-- Change `--name` in `runargs` from `go-dev-container` to the name  of your project.
-- Change `source=go-dev-container-bashhistory` to `source=<YOUR-PROJECT>-bashhistory`
-- Change `source=go-dev-container-plugins` to `source=<YOUR-PROJECT>-plugins`
 
 ## Starship 
 
@@ -98,7 +95,7 @@ Starship is a custom Power Line command prompt we include.
 
 ![Starship Prompt](images/starship-prompt.png)
 
-For Starship to function properly you need one of the [Nerd Font](https://www.nerdfonts.com/) installed from [Nerd Fonts Downloads](https://www.nerdfonts.com/font-downloads).
+For Starship to function properly you need a [Nerd Font](https://www.nerdfonts.com/) installed from [Nerd Fonts Downloads](https://www.nerdfonts.com/font-downloads).
 
 See [Initial Worksation Setup](#initial-worksation-setup) for instructions on downloading and installing the fonts.
 
