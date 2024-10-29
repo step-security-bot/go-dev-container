@@ -54,15 +54,18 @@ See the base `mise` config file at `home/vscode/.config/mise/config.toml` for al
 
 1. Copy the `.mise.toml` file from the root of this repo to your project's root and modify it as needed.
 1. The provided `.devcontainer` will automatically call `mise install` to install the custom versions of the applications.
-1. After the container is started and you shell into it `mise` will automatically install the versions listed in the `.mise.toml` file.
+1. After the container is started and you exec into it, `mise` will automatically install the app versions listed in the `.mise.toml` file.
+1. Other applications can also be installed by editing the `.mise.toml` file.  
+  Run `mise help` for examples.
 
 ## Included `.devcontainer` Config
 
-This repository not only builds a Go dev container into a Docker container it also includes example usage in the `.devcontainer` directory.  
+This repository also includes an example on how to use the built Go dev container.
 
 Do the following to use this example.
 
-1. Clone down the repository.
+1. Clone down the repository.  
+   `git clone https://github.com/sarg3nt/go-dev-container.git`
 2. Ensure your target project does not already have a `.devcontainer` directory.  If it does, you will either need to rename it for testing or delete it.
 3. Copy the `.devcontainer` directory to your project.
 4. Copy the following files to the root of your project.  
@@ -70,6 +73,11 @@ Do the following to use this example.
     - `.mise.toml`:  The config file for manageing specific versions of tooling you need for your Go project.
     - `cspell.json`:  The cspell config for spell checking in your project, edit to add any specific words that your project needs.
     - `dev.sh`:  Helps launch VSCode and exec into the dev container.  This file needs some modification to use in your repository.  See [dev.sh](#devsh) for instructions.
+
+We've included an `install.sh` script to automate the process of copying the above files into your project directory.  
+The script must be ran from the root of the `go-dev-container` project.  
+Example:  
+`./install.sh ~/src/my-go-project`
 
 ### Dev Container Setup
 
