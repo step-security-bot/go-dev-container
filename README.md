@@ -1,4 +1,4 @@
-<!--cspell:ignore sarg  -->
+<!--cspell:ignore sarg trivy gitui kubectx Fira Firacode Caskaydia Consolas   -->
 # Go Dev Container
 
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/sarg3nt/go-dev-container/badge)](https://scorecard.dev/viewer/?uri=github.com/sarg3nt/go-dev-container)
@@ -8,10 +8,10 @@
 [![Dependency Review](https://github.com/sarg3nt/go-dev-container/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/dependency-review.yml)
 [![Release](https://github.com/sarg3nt/go-dev-container/actions/workflows/release.yml/badge.svg)](https://github.com/sarg3nt/go-dev-container/actions/workflows/release.yml)
 
-A Go Dev Container using `mise` to install Go and other conventinet tools.  `mise` can then be used to install various other go versions as needed.
+A Go Dev Container using `mise` to install Go and other convenient tools.  `mise` can then be used to install various other go versions as needed.
 
 - [Tools Included](#tools-included)
-  - [Go Tooling](#go-tooling)
+  - [Go](#go)
   - [Utilities](#utilities)
 - [Using `mise` to Manage Go Versions](#using-mise-to-manage-go-versions)
 - [Included `.devcontainer` Config](#included-devcontainer-config)
@@ -29,9 +29,9 @@ A Go Dev Container using `mise` to install Go and other conventinet tools.  `mis
 
 ## Tools Included
 
-See the root `mise` config file at `home/vscode/.config/mise/config.toml` for all tools and versions.
+See the base `mise` config file at `home/vscode/.config/mise/config.toml` for all tools and versions.
 
-### Go Tooling
+### Go
 - golang
 - golangci-lint
 - goreleaser
@@ -50,22 +50,22 @@ See the root `mise` config file at `home/vscode/.config/mise/config.toml` for al
 
 ## Using `mise` to Manage Go Versions
 
-1. Copy the `.mise.toml` file from the root of this repo to your projects repo root and modify it as needed.
-1. The provided `.devcontainer` will automatclly call `mise install` to install the custom versions of the applications.
+1. Copy the `.mise.toml` file from the root of this repo to your project's root and modify it as needed.
+1. The provided `.devcontainer` will automatically call `mise install` to install the custom versions of the applications.
 1. After the container is started and you shell into it you may need to call `mise use golang@<version>` to switch to the new version.  The included `help` explains how to do this in more detail and other `mise` commands you can use.
 
 ## Included `.devcontainer` Config
 
-This project not only builds the dev container into the provided Docker container it also includes an example implemantion in the `.devontainer` directory.  
-Do the following to use this implmention.
+This project not only builds the dev container into the provided Docker container it also includes an example implemantion in the `.devcontainer` directory.  
+Do the following to use this implementation.
 
-1. Cone down the rpository.
-1. Copy the `.devcontainer` directory to your project.  Note:  you should not already have a `.devctonaer` directory or things could get weird.
+1. Cone down the repository.
+1. Copy the `.devcontainer` directory to your project.  Note:  you should not already have a `.devcontainer` directory or things could get weird.
 1. Copy the following files to the root of your projects.  All of these are optional but encouraged.
   - `.mise.toml`
   - `cspell.json`  Edit this with your specific words that you need to `cspell` to ignroe globally.
   - `dev.sh` This file helps launch and exec into the dev container.
-1. Starship has a custom Power Line command prompt we include, for it to function properly you need one of the Nerd Fonts installed.  See the [Initial Worksation Setup](#initial-worksation-setup) documentiaon for instrucitons on downloading and installing the fonts.
+1. Starship has a custom Power Line command prompt we include, for it to function properly you need one of the Nerd Fonts installed.  See the [Initial Worksation Setup](#initial-worksation-setup) documentation for instructions on downloading and installing the fonts.
 
 
 ## Initial Worksation Setup
@@ -119,7 +119,7 @@ The following contains initial project setup.
 This script is used to more easily start Visual Studio code and hop into the Dev Container from the terminal that it is ran from.
 
 - Open the `dev.sh` file and set a `docker_exec_command` if desired, this is optional but if this repo is used a lot, it is a nice to have.  This will create a command in the users `.bashrc` and `.zshrc` to quickly exec into this running dev container.
-- Change `project_name` to match the name of the repository.  Exaple: If your root project repository is called `my-go-project` then set `project_name` to `my-go-project`
+- Change `project_name` to match the name of the repository.  Example: If your root project repository is called `my-go-project` then set `project_name` to `my-go-project`
 
 To use the `./dev.sh` script, simply run it, then when VS Code opens, there should be a prompt at the bottom right of the editor saying "Folder contains a Dev Container . . .".  Click the "Reopen in Container" button and VS Code will open the dev container and attach to it.
 ![Reopen in Container](.devcontainer/reopen_in_container.png)
