@@ -11,7 +11,7 @@
 A Go Dev Container using `mise` to install Go and other convenient tools.  
 `mise` can then be used to install various other Go versions as needed.
 
-- [Tools Included](#tools-included)
+- [Included Tools](#included-tools)
   - [Go](#go)
   - [Utilities](#utilities)
 - [Using `mise` to Manage Go Versions](#using-mise-to-manage-go-versions)
@@ -28,7 +28,7 @@ A Go Dev Container using `mise` to install Go and other convenient tools.
 - [Author](#author)
 
 
-## Tools Included
+## Included Tools
 
 See the base `mise` config file at `home/vscode/.config/mise/config.toml` for all tools and versions.
 
@@ -63,9 +63,9 @@ Do the following to use this implementation.
 1. Clone down the repository.
 1. Copy the `.devcontainer` directory to your project.  Note:  you should not already have a `.devcontainer` directory or things could get weird.
 1. Copy the following files to the root of your project.  All of these are optional but encouraged.
-    - `.mise.toml`: The config file for manageing specific versions of tooling you need for your Go project.
-    - `cspell.json`: The cspell config for spell checking in your project, edit to add any specific words that your project needs.
-    - `dev.sh`: This file helps launch and exec into the dev container.  This file needs some modification to use in your repository.  See [Initial Dev Container and Project Setup](#initial-dev-container-and-project-setup) for instructions.
+    - `.mise.toml`:  The config file for manageing specific versions of tooling you need for your Go project.
+    - `cspell.json`:  The cspell config for spell checking in your project, edit to add any specific words that your project needs.
+    - `dev.sh`:  Helps launch VSCode and exec into the dev container.  This file needs some modification to use in your repository.  See [dev.sh](#devsh) for instructions.
 
 ### Dev Container Setup
 
@@ -80,7 +80,9 @@ Edit the `devcontainer.json` file to make the following changes.
 
 ### `dev.sh`
 
-This script is used to more easily start Visual Studio code and hop into the Dev Container from the terminal that it is ran from.
+This script is used to easily start VSCode and exec into the Dev Container from the terminal that it is ran from.  This frees the developer from having to use the VSCode integrated terminal.  
+
+You can run `dev.sh` in multiple terminals once VSCode is running and the container has started to easily exec into it.
 
 - Open the `dev.sh` file and set a `docker_exec_command` if desired, this is optional but if this repo is used a lot, it is a nice to have.  This will create a command in the users `.bashrc` and `.zshrc` to quickly exec into this running dev container.
 - Change `project_name` to match the name of the repository.  Example: If your root project repository is called `my-go-project` then set `project_name` to `my-go-project`
