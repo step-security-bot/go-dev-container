@@ -1,9 +1,9 @@
 // cSpell:ignore FUMPT ciiqr darkriszty euskadi Gruntfuggly huizhou githd kato mhutchie tamasfe koehler yzhang gopls gofumpt docomment 
 {
   "name": "go-dev-container",
-  // "runArgs": [
-  //   "--name=go-dev-container-dev"
-  // ],
+  "runArgs": [
+    "--name=go-dev-container"
+  ],
   "mounts": [
     "source=go-dev-container-bashhistory,target=/commandhistory,type=volume",
     "source=go-dev-container-plugins,target=/home/vscode/.vscode-server/extensions,type=volume",
