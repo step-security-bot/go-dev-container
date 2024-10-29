@@ -4,9 +4,12 @@ on:
   schedule:
     - cron: '0 0 * * 0' # Runs weekly
   workflow_dispatch: # Allows manual triggering
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build-and-release:
+  release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -18,3 +21,5 @@ jobs:
         # and https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md#branches
       - name: Release
         uses: huggingface/semver-release-action@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
