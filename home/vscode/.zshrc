@@ -159,8 +159,8 @@ source "$HOME/.fzf-key-bindings.zsh"
 source "$HOME/.fzf-completion.zsh"
 
 # Active mise
-eval "$(~/.local/bin/mise activate zsh)"
-mie trust --all
+eval "$(/usr/local/bin/mise activate zsh)"
+mise trust --all
 mise install --yes
 
 help

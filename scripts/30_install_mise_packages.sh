@@ -7,10 +7,10 @@ main() {
   source "/usr/bin/lib/sh/log.sh"
 
   ############ Install mise
-  log "30-install-mise.sh" "blue"
+  log "30_install_mise_packages.sh" "blue"
 
-  log "Installing mise" "green"
-  curl -sL https://mise.run | sh
+  # Mise is installed in the docker file from it's master docker branch.
+  log "Configuring mise" "green"
   export PATH="$HOME/.local/share/mise/shims:$HOME/.local/bin/:$PATH"
 
   log "Mise version" "green"
