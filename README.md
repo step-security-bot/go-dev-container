@@ -11,6 +11,7 @@
 A Go Dev Container using `mise` to install Go and other convenient tools.  
 `mise` can then be used to install various other Go versions as needed.
 
+- [Using the Go Dev Container](#using-the-go-dev-container)
 - [Included Tools](#included-tools)
   - [Go](#go)
   - [Utilities](#utilities)
@@ -19,7 +20,7 @@ A Go Dev Container using `mise` to install Go and other convenient tools.
   - [Dev Container Setup](#dev-container-setup)
   - [`dev.sh`](#devsh)
 - [Starship](#starship)
-- [Initial Worksation Setup](#initial-worksation-setup)
+- [Initial Workstation Setup](#initial-workstation-setup)
   - [WSL on Windows](#wsl-on-windows)
   - [Windows Font Install](#windows-font-install)
     - [Windows Terminal Font Setup](#windows-terminal-font-setup)
@@ -28,6 +29,12 @@ A Go Dev Container using `mise` to install Go and other convenient tools.
 - [Contributions](#contributions)
 - [Author](#author)
 
+
+## Using the Go Dev Container
+
+The container is stored in the [Github Container Registry](https://github.com/sarg3nt/go-dev-container/pkgs/container/go-dev-container).
+
+You can use the container in your own dev container config or use the [included one](#included-devcontainer-config).
 
 ## Included Tools
 
@@ -70,7 +77,7 @@ Do the following to use this example.
 3. Copy the `.devcontainer` directory to your project.
 4. Copy the following files to the root of your project.  
    These are optional but encouraged.
-    - `.mise.toml`:  The config file for manageing specific versions of tooling you need for your Go project.
+    - `.mise.toml`:  The config file for managing specific versions of tooling you need for your Go project.
     - `cspell.json`:  The cspell config for spell checking in your project, edit to add any specific words that your project needs.
     - `dev.sh`:  Helps launch VSCode and exec into the dev container.  This file needs some modification to use in your repository.  See [dev.sh](#devsh) for instructions.
 
@@ -117,11 +124,11 @@ Starship is a custom Power Line command prompt we include.
 
 For Starship to function properly you need a [Nerd Font](https://www.nerdfonts.com/) installed from [Nerd Fonts Downloads](https://www.nerdfonts.com/font-downloads).
 
-See [Initial Worksation Setup](#initial-worksation-setup) for instructions on downloading and installing the fonts.
+See [Initial Workstation Setup](#initial-workstation-setup) for instructions on downloading and installing the fonts.
 
-## Initial Worksation Setup
+## Initial Workstation Setup
 
-Instructions to set up your worksation.
+Instructions to set up your workstation.
 For more information on Dev Containers check out the [official docs](https://code.visualstudio.com/docs/devcontainers/containers).
 
 ### WSL on Windows
