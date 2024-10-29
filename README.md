@@ -75,9 +75,10 @@ Do the following to use this example.
     - `dev.sh`:  Helps launch VSCode and exec into the dev container.  This file needs some modification to use in your repository.  See [dev.sh](#devsh) for instructions.
 
 We've included an `install.sh` script to automate the process of copying the above files into your project directory.  
+
 The script must be ran from the root of the `go-dev-container` project.  
-Example:  
-`./install.sh ~/src/my-go-project`
+
+**Example:**  `./install.sh ~/src/my-go-project`
 
 ### Dev Container Setup
 
@@ -99,7 +100,8 @@ This script is used to easily start VSCode and exec into the Dev Container from 
 You can run `dev.sh` in multiple terminals once VSCode is running and the container has started to easily exec into it.
 
 - Open the `dev.sh` file and set a `docker_exec_command` if desired, this is optional but if this repo is used a lot, it is a nice to have.  This will create a command in the users `.bashrc` and `.zshrc` to quickly exec into this running dev container.
-- Change `project_name` to match the name of the repository.  Example: If your root project repository is called `my-go-project` then set `project_name` to `my-go-project`
+- Change `project_name` to match the name of the repository.  
+  **Example:** If your root project repository is called `my-go-project` then set `project_name` to `my-go-project`
 
 To use the `./dev.sh` script, simply run it, then when VS Code opens, there should be a prompt at the bottom right of the editor saying "Folder contains a Dev Container . . .".  Click the "Reopen in Container" button and VS Code will open the dev container and attach to it.
 
