@@ -7,7 +7,9 @@
 # home/vscode/.config/mise/config.toml
 # Add custom Mise tools and version to your projects root as .mist.toml  See: https://mise.jdx.dev/configuration.html
 
-FROM rockylinux:9@sha256:d7be1c094cc5845ee815d4632fe377514ee6ebcf8efaed6892889657e5ddaaa6
+FROM jdxcode/mise@sha256:a9f92f8ddaf6450359cf0fd40fb36dd4e9be8b419a3c17305164497cace8af16 AS mise
+
+FROM rockylinux:9@sha256:d7be1c094cc5845ee815d4632fe377514ee6ebcf8efaed6892889657e5ddaaa6 AS final
 
 LABEL org.opencontainers.image.source=https://github.com/sarg3nt/go-dev-container
 
@@ -33,6 +35,9 @@ RUN /scripts/20_install_microsoft_dev_container_features.sh
 # Set current user to the vscode user, run all future commands as this user.
 USER vscode
 
+# Copy the mise binary from the mise container
+COPY --from=mise /usr/local/bin/mise /usr/local/bin/mise
+
 # Install applications that are scoped to the vscode user
 RUN sudo chown vscode /scripts 
 
@@ -43,15 +48,11 @@ COPY --chown=vscode:vscode home/vscode/.config/mise /home/vscode/.config/mise
 ARG MISE_VERBOSE=0
 ARG RUST_BACKTRACE=0
 # https://github.com/jdx/mise/releases
-# Passed from the .devcontainer/devcontainer.json file, static version here to use as a default.
-ARG MISE_VERSION="v2024.10.8"
-RUN /scripts/30_install_mise.sh 
+RUN /scripts/30_install_mise_packages.sh
 
 # https://github.com/go-delve/delve/releases
-# Passed from the .devcontainer/devcontainer.json file, static version here to use as a default.
 ARG GO_DELVE_DLV_VERSION="1.23.1"
 # https://github.com/mvdan/gofumpt/releases
-# Passed from the .devcontainer/devcontainer.json file, static version here to use as a default.
 ARG GO_FUMPT_VERSION="0.7.0"
 RUN /scripts/40_install_other_apps.sh
 
