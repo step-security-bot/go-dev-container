@@ -25,13 +25,24 @@ jobs:
 
       - name: Get the latest tag version
         id: get_version
-        run: echo "TAG=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_ENV
+        run: |
+          latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo "Latest tag: $latest_tag"
+          if [[ $latest_tag =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            major=${BASH_REMATCH[1]}
+            minor=${BASH_REMATCH[2]}
+            patch=${BASH_REMATCH[3]}
+            new_patch=$((patch + 1))
+            new_tag="v${major}.${minor}.${new_patch}"
+            echo "New tag: $new_tag"
+            echo "TAG=$new_tag" >> $GITHUB_ENV
+          fi
 
       - name: 'Create Release'
         id: create_release
         uses: ncipollo/release-action@v1
         with:
-          body: "A test of the auto releaseer for v 1.0.1-beta.1"
+          body: "This is an automatic release contianing upgrades to system packages in the Rocker Linux base Docker image."
           makeLatest: false
           prerelease: true
           tag: ${{ env.TAG }}
