@@ -19,5 +19,5 @@ jobs:
         with:
           body: "A test of the auto releaseer for v 1.0.1-beta.1"
           makeLatest: false
-          draft: true
+          prerelease: true
           tag: "v1.0.1-beta.1"
