@@ -4,6 +4,10 @@ on:
   push:
     tags:
       - '*'
+  workflow_run:
+    workflows: ["Periodic Release"]
+    types:
+      - completed
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
