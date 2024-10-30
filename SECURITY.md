@@ -8,5 +8,6 @@ Dependabot is used to maintain dependency versions.
 
 ## Reporting a Vulnerability
 
-Report found vulnerabilities by contacting us at [security@sarg3.net](mailto:security@sarg3.net)
+- Create an Issue for low impact vulnerabilities.
+- Report high impact vulnerabilities by contacting us at [security@sarg3.net](mailto:security@sarg3.net)
 
