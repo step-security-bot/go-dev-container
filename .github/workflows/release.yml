@@ -1,4 +1,4 @@
-name: Release
+name: Release Build and Push
 
 on:
   push:
@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  release-docker-image:
+  build-and-push:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -20,18 +20,63 @@ jobs:
 
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
+        uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7
         with:
-          egress-policy: audit
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+            auth.docker.io:443
+            cdn.dl.k8s.io:443
+            codecs.fedoraproject.org:443
+            distro.ibiblio.org:80
+            dl.google.com:443
+            dl.k8s.io:443
+            download.docker.com:443
+            epel.mirror.shastacoe.net:443
+            ftp-nyc.osuosl.org:443
+            ftp.agdsn.de:80
+            ftp.fau.de:80
+            ftp.halifax.rwth-aachen.de:443
+            ftp.plusline.net:443
+            get.helm.sh:443
+            ghcr.io:443
+            github.com:443
+            gitlab.com:443
+            mirror.chpc.utah.edu:80
+            mirror.informatik.hs-fulda.de:443
+            mirror.rnet.missouri.edu:80
+            mirror.siena.edu:80
+            mirror1.hs-esslingen.de:443
+            mirrors.fedoraproject.org:443
+            mirrors.rit.edu:80
+            mirrors.rockylinux.org:443
+            mirrors.xtom.de:80
+            mise-versions.jdx.dev:80
+            mise.jdx.dev:80
+            objects.githubusercontent.com:443
+            ohioix.mm.fcix.net:80
+            pkg-containers.githubusercontent.com:443
+            production.cloudflare.docker.com:443
+            proxy.golang.org:443
+            raw.githubusercontent.com:443
+            registry-1.docker.io:443
+            repo.ialab.dsu.edu:80
+            rocky-linux-europe-west3.production.gcp.mirrors.ctrliq.cloud:443
+            rocky.mirror.shastacoe.net:443
+            sftp.hpc.fau.edu:443
+            sum.golang.org:443
+            us.mirrors.cicku.me:443
+            volico.mm.fcix.net:80
 
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
           fetch-tags: true
 
       - name: Log into registry
-        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
+        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -39,7 +84,7 @@ jobs:
 
       - name: Extract Docker metadata
         id: meta
-        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
+        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -48,9 +93,11 @@ jobs:
             type=semver,pattern={{major}}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@4f58ea79222b3b9dc2c8bbdd6debcef730109a75 # v6.9.0
+        uses: docker/build-push-action@4f58ea79222b3b9dc2c8bbdd6debcef730109a75
         with:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+        env:  
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}

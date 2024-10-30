@@ -13,6 +13,12 @@ main() {
   log "Configuring mise" "green"
   export PATH="$HOME/.local/share/mise/shims:$HOME/.local/bin/:$PATH"
 
+  if [[ -n "${GITHUB_API_TOKEN:-}" ]]; then
+    log "GITHUB_API_TOKEN found" "green"
+  else
+    log "GITHUB_API_TOKEN not found" "yellow"
+  fi
+
   log "Mise version" "green"
   mise version
 

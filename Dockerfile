@@ -15,10 +15,6 @@ LABEL org.opencontainers.image.source=https://github.com/sarg3nt/go-dev-containe
 
 ENV TZ='America/Los_Angeles'
 
-# Token for talking to the Github API for mise and our custom installs.
-ARG GITHUB_TOKEN=""
-ENV GITHUB_API_TOKEN=$GITHUB_TOKEN
-
 # What user will be created in the dev container and will we run under.
 # Reccomend not changing this.
 ENV USERNAME="vscode"
