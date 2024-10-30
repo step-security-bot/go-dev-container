@@ -19,11 +19,5 @@ jobs:
         with:
           body: "A test of the auto releaseer for v 1.0.1-beta.1"
           makeLatest: false
+          draft: true
           tag: "v1.0.1-beta.1"
-
-        # See: https://github.com/huggingface/semver-release-action?tab=readme-ov-file
-        # and https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md#branches
-      # - name: Release
-      #   uses: huggingface/semver-release-action@latest
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
