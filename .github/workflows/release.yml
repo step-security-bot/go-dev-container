@@ -4,6 +4,11 @@ on:
   push:
     tags:
       - '*'
+  workflow_run:
+    workflows: ["Periodic Build and Release"]
+    types:
+      - completed
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
@@ -35,6 +40,9 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch all tags
+        run: git fetch --tags
 
       - name: Extract Docker metadata
         id: meta
