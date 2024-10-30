@@ -15,9 +15,15 @@ jobs:
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: ncipollo/release-action@v1
+        with:
+          body: "A test of the auto releaseer for v 1.0.1-beta.1"
+          makeLatest: false
+          tag: "v1.0.1-beta.1"
+
         # See: https://github.com/huggingface/semver-release-action?tab=readme-ov-file
         # and https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md#branches
-      - name: Release
-        uses: huggingface/semver-release-action@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Release
+      #   uses: huggingface/semver-release-action@latest
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
