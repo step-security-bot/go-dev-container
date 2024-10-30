@@ -1,4 +1,4 @@
-name: Periodic Build and Release
+name: Periodic Release
 
 on:
   schedule:
