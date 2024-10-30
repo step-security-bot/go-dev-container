@@ -9,6 +9,12 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  VERSION: ""
+  TAG_MAJOR: ""
+  TAG_MINOR: ""
+  TAG_PATCH: ""
+  TAG_LATEST: ""
+
 permissions: read-all
 
 jobs:
@@ -27,21 +33,41 @@ jobs:
       - name: Get the latest tag version
         id: get_version
         run: |
-          latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
-          echo "Latest tag: $latest_tag"
-          if [[ $latest_tag =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+          latest_version=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo "Latest Version: $latest_version"
+          if [[ $latest_version =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
             major=${BASH_REMATCH[1]}
+            echo "Major: $major"
             minor=${BASH_REMATCH[2]}
+            echo "Minor: $minor"
             patch=${BASH_REMATCH[3]}
+            echo "Patch: $patch"
+            
             new_patch=$((patch + 1))
-            new_tag="v${major}.${minor}.${new_patch}"
-            echo "New tag: $new_tag"
-            echo "TAG=$new_tag" >> $GITHUB_ENV
+
+            tag_major=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${major}
+            tag_minor=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${major}.${minor}
+            tag_patch=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${major}.${minor}.${new_patch}
+            tag_latest=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+            echo "TAG_MAJOR: $tag_major"
+            echo "TAG_MAJOR=$tag_major" >> $GITHUB_ENV
+            echo "TAG_MINOR: $tag_minor"
+            echo "TAG_MINOR=$tag_minor" >> $GITHUB_ENV
+            echo "TAG_PATCH: $tag_patch"
+            echo "TAG_PATCH=$tag_patch" >> $GITHUB_ENV
+            echo "TAG_LATEST: $tag_latest"
+            echo "TAG_LATEST=$tag_latest" >> $GITHUB_ENV
+
+            new_version="v${major}.${minor}.${new_patch}"
+            echo "New Version: $new_version"
+            echo "VERSION=$new_version" >> $GITHUB_ENV
           else
             echo "Could not determine the latest tag version."
             exit 1
           fi
 
+      # Docs: https://github.com/marketplace/actions/create-release
       - name: 'Create Release'
         id: create_release
         uses: ncipollo/release-action@v1
@@ -49,7 +75,7 @@ jobs:
           body: "A Weekly release contianing upgrades to system packages in the base Rocker Linux container."
           makeLatest: true
           prerelease: false
-          tag: ${{ env.TAG }}
+          tag: ${{ env.VERSION }}
 
       - name: Harden Runner
         uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
@@ -68,4 +94,4 @@ jobs:
         with:
           build-args: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.TAG_MAJOR }},${{ env.TAG_MINOR }},${{ env.TAG_PATCH }},${{ env.TAG_LATEST }}
