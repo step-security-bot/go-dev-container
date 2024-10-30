@@ -1,4 +1,4 @@
-name: Periodic Release
+name: Weekly Release Build and Push
 
 on:
   schedule:
@@ -18,28 +18,24 @@ env:
 permissions: read-all
 
 jobs:
-  release:
+  release-build-and-push:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7
+        with:
+          egress-policy: audit
+
       - name: 'Checkout Repository'
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
           fetch-tags: true
 
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-
+      # Must generate the tag version manually becuase scheduled workflows do not have access to ref: refs/tags/v1.0.0
       - name: Get the latest tag version
         id: get_version
         run: |
@@ -72,38 +68,33 @@ jobs:
             new_version="v${major}.${minor}.${new_patch}"
             echo "New Version: $new_version"
             echo "VERSION=$new_version" >> $GITHUB_ENV
-            echo "tags from docker metadata: ${{ steps.meta.outputs.tags }}"
           else
             echo "Could not determine the latest tag version."
             exit 1
           fi
 
       # Docs: https://github.com/marketplace/actions/create-release
-      # - name: 'Create Release'
-      #   id: create_release
-      #   uses: ncipollo/release-action@v1
-      #   with:
-      #     body: "A Weekly release contianing upgrades to system packages in the base Rocker Linux container."
-      #     makeLatest: true
-      #     prerelease: false
-      #     tag: ${{ env.VERSION }}
+      - name: 'Create Release'
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          body: "A Weekly release contianing upgrades to system packages in the base Rocker Linux container."
+          makeLatest: true
+          prerelease: false
+          tag: ${{ env.VERSION }}
 
-      # - name: Harden Runner
-      #   uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
-      #   with:
-      #     egress-policy: audit
+ 
+      - name: Log into registry
+        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Log into registry
-      #   uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
-      #   with:
-      #     registry: ${{ env.REGISTRY }}
-      #     username: ${{ github.actor }}
-      #     password: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@4f58ea79222b3b9dc2c8bbdd6debcef730109a75 # v6.9.0
-      #   with:
-      #     push: true
-      #     tags: ${{ env.TAG_MAJOR }},${{ env.TAG_MINOR }},${{ env.TAG_PATCH }},${{ env.TAG_LATEST }}
-      #   env: 
-      #     GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@4f58ea79222b3b9dc2c8bbdd6debcef730109a75 # v6.9.0
+        with:
+          push: true
+          tags: ${{ env.TAG_MAJOR }},${{ env.TAG_MINOR }},${{ env.TAG_PATCH }},${{ env.TAG_LATEST }}
+        env: 
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
