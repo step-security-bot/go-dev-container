@@ -28,12 +28,6 @@ get_latest_dev_container_version() {
 create_required_folders() {
   echo "************** Create any required missing folders if they do not exist ******************"
   
-  if [[ ! -d "${HOME}" ]]; then
-    echo "Error: HOME directory does not exist."
-    exit 1
-  fi
-
-  
   if [[ ! -d "${HOME}" && -d "~/" ]]; then
     HOME="~/"
   fi
